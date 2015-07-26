@@ -1,0 +1,292 @@
+.TH "DOCKER" "1" " Docker User Manuals" "Docker Community" "JUNE 2014"  ""
+
+.SH NAME
+.PP
+docker\-create \- Create a new container
+
+.SH SYNOPSIS
+.PP
+\fBdocker create\fP
+[\fB\-a\fP|\fB\-\-attach\fP[=\fI[]\fP]]
+[\fB\-\-add\-host\fP[=\fI[]\fP]]
+[\fB\-\-blkio\-weight\fP[=\fI[BLKIO\-WEIGHT]\fP]]
+[\fB\-c\fP|\fB\-\-cpu\-shares\fP[=\fI0\fP]]
+[\fB\-\-cap\-add\fP[=\fI[]\fP]]
+[\fB\-\-cap\-drop\fP[=\fI[]\fP]]
+[\fB\-\-cidfile\fP[=\fICIDFILE\fP]]
+[\fB\-\-cpu\-period\fP[=\fI0\fP]]
+[\fB\-\-cpuset\-cpus\fP[=\fICPUSET\-CPUS\fP]]
+[\fB\-\-cpuset\-mems\fP[=\fICPUSET\-MEMS\fP]]
+[\fB\-\-cpu\-quota\fP[=\fI0\fP]]
+[\fB\-\-device\fP[=\fI[]\fP]]
+[\fB\-\-dns\-search\fP[=\fI[]\fP]]
+[\fB\-\-dns\fP[=\fI[]\fP]]
+[\fB\-e\fP|\fB\-\-env\fP[=\fI[]\fP]]
+[\fB\-\-entrypoint\fP[=\fIENTRYPOINT\fP]]
+[\fB\-\-env\-file\fP[=\fI[]\fP]]
+[\fB\-\-expose\fP[=\fI[]\fP]]
+[\fB\-h\fP|\fB\-\-hostname\fP[=\fIHOSTNAME\fP]]
+[\fB\-\-help\fP]
+[\fB\-i\fP|\fB\-\-interactive\fP[=\fIfalse\fP]]
+[\fB\-\-ipc\fP[=\fIIPC\fP]]
+[\fB\-l\fP|\fB\-\-label\fP[=\fI[]\fP]]
+[\fB\-\-label\-file\fP[=\fI[]\fP]]
+[\fB\-\-link\fP[=\fI[]\fP]]
+[\fB\-\-lxc\-conf\fP[=\fI[]\fP]]
+[\fB\-\-log\-driver\fP[=\fI[]\fP]]
+[\fB\-\-log\-opt\fP[=\fI[]\fP]]
+[\fB\-m\fP|\fB\-\-memory\fP[=\fIMEMORY\fP]]
+[\fB\-\-memory\-swap\fP[=\fIMEMORY\-SWAP\fP]]
+[\fB\-\-mac\-address\fP[=\fIMAC\-ADDRESS\fP]]
+[\fB\-\-name\fP[=\fINAME\fP]]
+[\fB\-\-net\fP[=\fI"bridge"\fP]]
+[\fB\-\-oom\-kill\-disable\fP[=\fIfalse\fP]]
+[\fB\-P\fP|\fB\-\-publish\-all\fP[=\fIfalse\fP]]
+[\fB\-p\fP|\fB\-\-publish\fP[=\fI[]\fP]]
+[\fB\-\-pid\fP[=\fI[]\fP]]
+[\fB\-\-uts\fP[=\fI[]\fP]]
+[\fB\-\-privileged\fP[=\fIfalse\fP]]
+[\fB\-\-read\-only\fP[=\fIfalse\fP]]
+[\fB\-\-restart\fP[=\fIRESTART\fP]]
+[\fB\-\-security\-opt\fP[=\fI[]\fP]]
+[\fB\-t\fP|\fB\-\-tty\fP[=\fIfalse\fP]]
+[\fB\-u\fP|\fB\-\-user\fP[=\fIUSER\fP]]
+[\fB\-v\fP|\fB\-\-volume\fP[=\fI[]\fP]]
+[\fB\-\-volumes\-from\fP[=\fI[]\fP]]
+[\fB\-w\fP|\fB\-\-workdir\fP[=\fIWORKDIR\fP]]
+[\fB\-\-cgroup\-parent\fP[=\fICGROUP\-PATH\fP]]
+IMAGE [COMMAND] [ARG...]
+
+.SH OPTIONS
+.PP
+\fB\-a\fP, \fB\-\-attach\fP=[]
+   Attach to STDIN, STDOUT or STDERR.
+
+.PP
+\fB\-\-add\-host\fP=[]
+   Add a custom host\-to\-IP mapping (host:ip)
+
+.PP
+\fB\-\-blkio\-weight\fP=0
+   Block IO weight (relative weight) accepts a weight value between 10 and 1000.
+
+.PP
+\fB\-c\fP, \fB\-\-cpu\-shares\fP=0
+   CPU shares (relative weight)
+
+.PP
+\fB\-\-cap\-add\fP=[]
+   Add Linux capabilities
+
+.PP
+\fB\-\-cap\-drop\fP=[]
+   Drop Linux capabilities
+
+.PP
+\fB\-\-cidfile\fP=""
+   Write the container ID to the file
+
+.PP
+\fB\-\-cgroup\-parent\fP=""
+   Path to cgroups under which the cgroup for the container will be created. If the path is not absolute, the path is considered to be relative to the cgroups path of the init process. Cgroups will be created if they do not already exist.
+
+.PP
+\fB\-\-cpu\-peroid\fP=0
+    Limit the CPU CFS (Completely Fair Scheduler) period
+
+.PP
+\fB\-\-cpuset\-cpus\fP=""
+   CPUs in which to allow execution (0\-3, 0,1)
+
+.PP
+\fB\-\-cpuset\-mems\fP=""
+   Memory nodes (MEMs) in which to allow execution (0\-3, 0,1). Only effective on NUMA systems.
+
+.PP
+If you have four memory nodes on your system (0\-3), use \fB\fC\-\-cpuset\-mems=0,1\fR
+then processes in your Docker container will only use memory from the first
+two memory nodes.
+
+.PP
+\fB\-cpu\-quota\fP=0
+   Limit the CPU CFS (Completely Fair Scheduler) quota
+
+.PP
+\fB\-\-device\fP=[]
+   Add a host device to the container (e.g. \-\-device=/dev/sdc:/dev/xvdc:rwm)
+
+.PP
+\fB\-\-dns\-search\fP=[]
+   Set custom DNS search domains (Use \-\-dns\-search=. if you don't wish to set the search domain)
+
+.PP
+\fB\-\-dns\fP=[]
+   Set custom DNS servers
+
+.PP
+\fB\-e\fP, \fB\-\-env\fP=[]
+   Set environment variables
+
+.PP
+\fB\-\-entrypoint\fP=""
+   Overwrite the default ENTRYPOINT of the image
+
+.PP
+\fB\-\-env\-file\fP=[]
+   Read in a line delimited file of environment variables
+
+.PP
+\fB\-\-expose\fP=[]
+   Expose a port or a range of ports (e.g. \-\-expose=3300\-3310) from the container without publishing it to your host
+
+.PP
+\fB\-h\fP, \fB\-\-hostname\fP=""
+   Container host name
+
+.PP
+\fB\-\-help\fP
+  Print usage statement
+
+.PP
+\fB\-i\fP, \fB\-\-interactive\fP=\fItrue\fP|\fIfalse\fP
+   Keep STDIN open even if not attached. The default is \fIfalse\fP.
+
+.PP
+\fB\-\-ipc\fP=""
+   Default is to create a private IPC namespace (POSIX SysV IPC) for the container
+                               'container:': reuses another container shared memory, semaphores and message queues
+                               'host': use the host shared memory,semaphores and message queues inside the container.  Note: the host mode gives the container full access to local shared memory and is therefore considered insecure.
+
+.PP
+\fB\-l\fP, \fB\-\-label\fP=[]
+   Adds metadata to a container (e.g., \-\-label=com.example.key=value)
+
+.PP
+\fB\-\-label\-file\fP=[]
+   Read labels from a file. Delimit each label with an EOL.
+
+.PP
+\fB\-\-link\fP=[]
+   Add link to another container in the form of :alias or just
+    in which case the alias will match the name.
+
+.PP
+\fB\-\-lxc\-conf\fP=[]
+   (lxc exec\-driver only) Add custom lxc options \-\-lxc\-conf="lxc.cgroup.cpuset.cpus = 0,1"
+
+.PP
+\fB\-\-log\-driver\fP="|\fIjson\-file\fP|\fIsyslog\fP|\fIjournald\fP|\fInone\fP"
+  Logging driver for container. Default is defined by daemon \fB\fC\-\-log\-driver\fR flag.
+  \fBWarning\fP: \fB\fCdocker logs\fR command works only for \fB\fCjson\-file\fR logging driver.
+
+.PP
+\fB\-\-log\-opt\fP=[]
+  Logging driver specific options.
+
+.PP
+\fB\-m\fP, \fB\-\-memory\fP=""
+   Memory limit (format: , where unit = b, k, m or g)
+
+.PP
+Allows you to constrain the memory available to a container. If the host
+supports swap memory, then the \fB\-m\fP memory setting can be larger than physical
+RAM. If a limit of 0 is specified (not using \fB\-m\fP), the container's memory is
+not limited. The actual limit may be rounded up to a multiple of the operating
+system's page size (the value would be very large, that's millions of trillions).
+
+.PP
+\fB\-\-memory\-swap\fP=""
+   Total memory limit (memory + swap)
+
+.PP
+Set \fB\fC\-1\fR to disable swap (format: , where unit = b, k, m or g).
+This value should always larger than \fB\-m\fP, so you should always use this with \fB\-m\fP.
+
+.PP
+\fB\-\-mac\-address\fP=""
+   Container MAC address (e.g. 92:d0:c6:0a:29:33)
+
+.PP
+\fB\-\-name\fP=""
+   Assign a name to the container
+
+.PP
+\fB\-\-net\fP="bridge"
+   Set the Network mode for the container
+                               'bridge': creates a new network stack for the container on the docker bridge
+                               'none': no networking for this container
+                               'container:': reuses another container network stack
+                               'host': use the host network stack inside the container.  Note: the host mode gives the container full access to local system services such as D\-bus and is therefore considered insecure.
+
+.PP
+\fB\-\-oom\-kill\-disable\fP=\fItrue\fP|\fIfalse\fP
+    Whether to disable OOM Killer for the container or not.
+
+.PP
+\fB\-P\fP, \fB\-\-publish\-all\fP=\fItrue\fP|\fIfalse\fP
+   Publish all exposed ports to random ports on the host interfaces. The default is \fIfalse\fP.
+
+.PP
+\fB\-p\fP, \fB\-\-publish\fP=[]
+   Publish a container's port, or a range of ports, to the host
+                               format: ip:hostPort:containerPort | ip::containerPort | hostPort:containerPort | containerPort
+                               Both hostPort and containerPort can be specified as a range of ports.
+                               When specifying ranges for both, the number of container ports in the range must match the number of host ports in the range. (e.g., \fB\fC\-p 1234\-1236:1234\-1236/tcp\fR)
+                               (use 'docker port' to see the actual mapping)
+
+.PP
+\fB\-\-pid\fP=host
+   Set the PID mode for the container
+     \fBhost\fP: use the host's PID namespace inside the container.
+     Note: the host mode gives the container full access to local PID and is therefore considered insecure.
+
+.PP
+\fB\-\-uts\fP=host
+   Set the UTS mode for the container
+     \fBhost\fP: use the host's UTS namespace inside the container.
+     Note: the host mode gives the container access to changing the host's hostname and is therefore considered insecure.
+
+.PP
+\fB\-\-privileged\fP=\fItrue\fP|\fIfalse\fP
+   Give extended privileges to this container. The default is \fIfalse\fP.
+
+.PP
+\fB\-\-read\-only\fP=\fItrue\fP|\fIfalse\fP
+   Mount the container's root filesystem as read only.
+
+.PP
+\fB\-\-restart\fP="no"
+   Restart policy to apply when a container exits (no, on\-failure[:max\-retry], always)
+
+.PP
+\fB\-\-security\-opt\fP=[]
+   Security Options
+
+.PP
+\fB\-t\fP, \fB\-\-tty\fP=\fItrue\fP|\fIfalse\fP
+   Allocate a pseudo\-TTY. The default is \fIfalse\fP.
+
+.PP
+\fB\-u\fP, \fB\-\-user\fP=""
+   Username or UID
+
+.PP
+\fB\-v\fP, \fB\-\-volume\fP=[]
+   Bind mount a volume (e.g., from the host: \-v /host:/container, from Docker: \-v /container)
+
+.PP
+\fB\-\-volumes\-from\fP=[]
+   Mount volumes from the specified container(s)
+
+.PP
+\fB\-w\fP, \fB\-\-workdir\fP=""
+   Working directory inside the container
+
+.SH HISTORY
+.PP
+August 2014, updated by Sven Dowideit 
+\[la]SvenDowideit@home.org.au\[ra]
+September 2014, updated by Sven Dowideit 
+\[la]SvenDowideit@home.org.au\[ra]
+November 2014, updated by Sven Dowideit 
+\[la]SvenDowideit@home.org.au\[ra]

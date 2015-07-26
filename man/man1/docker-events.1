@@ -1,0 +1,110 @@
+.TH "DOCKER" "1" " Docker User Manuals" "Docker Community" "JUNE 2014"  ""
+
+.SH NAME
+.PP
+docker\-events \- Get real time events from the server
+
+.SH SYNOPSIS
+.PP
+\fBdocker events\fP
+[\fB\-\-help\fP]
+[\fB\-f\fP|\fB\-\-filter\fP[=\fI[]\fP]]
+[\fB\-\-since\fP[=\fISINCE\fP]]
+[\fB\-\-until\fP[=\fIUNTIL\fP]]
+
+.SH DESCRIPTION
+.PP
+Get event information from the Docker daemon. Information can include historical
+information and real\-time information.
+
+.PP
+Docker containers will report the following events:
+
+.PP
+.RS
+
+.nf
+create, destroy, die, export, kill, pause, restart, start, stop, unpause
+
+.fi
+.RE
+
+.PP
+and Docker images will report:
+
+.PP
+.RS
+
+.nf
+untag, delete
+
+.fi
+.RE
+
+.SH OPTIONS
+.PP
+\fB\-\-help\fP
+  Print usage statement
+
+.PP
+\fB\-f\fP, \fB\-\-filter\fP=[]
+   Provide filter values (i.e., 'event=stop')
+
+.PP
+\fB\-\-since\fP=""
+   Show all events created since timestamp
+
+.PP
+\fB\-\-until\fP=""
+   Stream events until this timestamp
+
+.SH EXAMPLES.SH Listening for Docker events
+.PP
+After running docker events a container 786d698004576 is started and stopped
+(The container name has been shortened in the output below):
+
+.PP
+.RS
+
+.nf
+# docker events
+2015\-01\-28T20:21:31.000000000\-08:00 59211849bc10: (from whenry/testimage:latest) start
+2015\-01\-28T20:21:31.000000000\-08:00 59211849bc10: (from whenry/testimage:latest) die
+2015\-01\-28T20:21:32.000000000\-08:00 59211849bc10: (from whenry/testimage:latest) stop
+
+.fi
+.RE
+.SH Listening for events since a given date
+.PP
+Again the output container IDs have been shortened for the purposes of this document:
+
+.PP
+.RS
+
+.nf
+# docker events \-\-since '2015\-01\-28'
+2015\-01\-28T20:25:38.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) create
+2015\-01\-28T20:25:38.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) start
+2015\-01\-28T20:25:39.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) create
+2015\-01\-28T20:25:39.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) start
+2015\-01\-28T20:25:40.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) die
+2015\-01\-28T20:25:42.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) stop
+2015\-01\-28T20:25:45.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) start
+2015\-01\-28T20:25:45.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) die
+2015\-01\-28T20:25:46.000000000\-08:00 c21f6c22ba27: (from whenry/testimage:latest) stop
+
+.fi
+.RE
+
+.PP
+If you do not provide the \-\-since option, the command returns only new and/or
+live events.
+
+.SH HISTORY
+.PP
+April 2014, Originally compiled by William Henry (whenry at redhat dot com)
+based on docker.com source material and internal work.
+June 2014, updated by Sven Dowideit 
+\[la]SvenDowideit@home.org.au\[ra]
+June 2015, updated by Brian Goff 
+\[la]cpuguy83@gmail.com\[ra]

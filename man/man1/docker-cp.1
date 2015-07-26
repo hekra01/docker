@@ -1,0 +1,125 @@
+.TH "DOCKER" "1" " Docker User Manuals" "Docker Community" "JUNE 2014"  ""
+
+.SH NAME
+.PP
+docker\-cp \- Copy files or folders from a container's PATH to a HOSTDIR
+or to STDOUT.
+
+.SH SYNOPSIS
+.PP
+\fBdocker cp\fP
+[\fB\-\-help\fP]
+CONTAINER:PATH HOSTDIR|\-
+
+.SH DESCRIPTION
+.PP
+Copy files or folders from a \fB\fCCONTAINER:PATH\fR to the \fB\fCHOSTDIR\fR or to \fB\fCSTDOUT\fR.
+The \fB\fCCONTAINER:PATH\fR is relative to the root of the container's filesystem. You
+can copy from either a running or stopped container.
+
+.PP
+The \fB\fCPATH\fR can be a file or directory. The \fB\fCdocker cp\fR command assumes all
+\fB\fCPATH\fR values start at the \fB\fC/\fR (root) directory. This means supplying the
+initial forward slash is optional; The command sees
+\fB\fCcompassionate\_darwin:/tmp/foo/myfile.txt\fR and
+\fB\fCcompassionate\_darwin:tmp/foo/myfile.txt\fR as identical.
+
+.PP
+The \fB\fCHOSTDIR\fR refers to a directory on the host. If you do not specify an
+absolute path for your \fB\fCHOSTDIR\fR value, Docker creates the directory relative to
+where you run the \fB\fCdocker cp\fR command. For example, suppose you want to copy the
+\fB\fC/tmp/foo\fR directory from a container to the \fB\fC/tmp\fR directory on your host. If
+you run \fB\fCdocker cp\fR in your \fB\fC\~\fR (home) directory on the host:
+
+.PP
+.RS
+
+.nf
+    $ docker cp compassionate\_darwin:tmp/foo /tmp
+
+.fi
+.RE
+
+.PP
+Docker creates a \fB\fC/tmp/foo\fR directory on your host. Alternatively, you can omit
+the leading slash in the command. If you execute this command from your home directory:
+
+.PP
+.RS
+
+.nf
+    $ docker cp compassionate\_darwin:tmp/foo tmp
+
+.fi
+.RE
+
+.PP
+Docker creates a \fB\fC\~/tmp/foo\fR subdirectory.
+
+.PP
+When copying files to an existing \fB\fCHOSTDIR\fR, the \fB\fCcp\fR command adds the new files to
+the directory. For example, this command:
+
+.PP
+.RS
+
+.nf
+    $ docker cp sharp\_ptolemy:/tmp/foo/myfile.txt /tmp
+
+.fi
+.RE
+
+.PP
+Creates a \fB\fC/tmp/foo\fR directory on the host containing the \fB\fCmyfile.txt\fR file. If
+you repeat the command but change the filename:
+
+.PP
+.RS
+
+.nf
+    $ docker cp sharp\_ptolemy:/tmp/foo/secondfile.txt /tmp
+
+.fi
+.RE
+
+.PP
+Your host's \fB\fC/tmp/foo\fR directory will contain both files:
+
+.PP
+.RS
+
+.nf
+    $ ls /tmp/foo
+    myfile.txt secondfile.txt
+
+.fi
+.RE
+
+.PP
+Finally, use '\-' to write the data as a \fB\fCtar\fR file to STDOUT.
+
+.SH OPTIONS
+.PP
+\fB\-\-help\fP
+  Print usage statement
+
+.SH EXAMPLES
+.PP
+An important shell script file, created in a bash shell, is copied from
+the exited container to the current dir on the host:
+
+.PP
+.RS
+
+.nf
+# docker cp c071f3c3ee81:setup.sh .
+
+.fi
+.RE
+
+.SH HISTORY
+.PP
+April 2014, Originally compiled by William Henry (whenry at redhat dot com)
+based on docker.com source material and internal work.
+June 2014, updated by Sven Dowideit 
+\[la]SvenDowideit@home.org.au\[ra]
