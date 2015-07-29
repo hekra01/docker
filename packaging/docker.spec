@@ -14,6 +14,7 @@ Packager: Docker <support@docker.com>
 # # so stripping the binaries breaks docker
 %global __os_install_post %{_rpmconfigdir}/brp-compress
 %global debug_package %{nil}
+%global _origversion 1.7.1
 
 # required packages for build
 # most are already in the container (see contrib/builder/rpm/generate.sh)
@@ -22,8 +23,26 @@ BuildRequires: pkgconfig(systemd)
 BuildRequires: golang
 BuildRequires: sqlite-devel
 BuildRequires: btrfs-progs-devel
+BuildRequires: device-mapper
 BuildRequires: device-mapper-devel
+
+## Toolchain specific >>
+BuildRequires: eglibc
+BuildRequires: eglibc-locale
+BuildRequires: eglibc-devel
+BuildRequires: eglibc-devel-static
+BuildRequires: eglibc-devel-utils
+BuildRequires: fake_binutils
+BuildRequires: fake_binutils-devel
+BuildRequires: stbgcc483
+BuildRequires: stbgcc483-cross
+BuildRequires: cpp483
+BuildRequires: gcc483-locale
+BuildRequires: gcc483-info
+BuildRequires: gcc483-c++
+BuildRequires: libstdc++-devel
 Requires: systemd-units
+# End Toolchain specific <<
 
 # required packages on install
 Requires: /bin/sh
@@ -53,8 +72,12 @@ depending on a particular stack or provider.
 mv .gittmp .git
 
 %build
-AUTO_GOPATH=1 ./hack/make.sh binary
-#export PATH=$PATH:$GOPATH
+# In case random segfault
+ulimit -c unlimited
+export DOCKER_BUILDTAGS='exclude_graphdriver_devicemapper exclude_graphdriver_btrfs'
+#export DOCKER_BUILDTAGS='exclude_graphdriver_devicemapper'
+#export DOCKER_BUILDTAGS='exclude_graphdriver_btrfs'
+AUTO_GOPATH=1 ./hack/make.sh dynbinary
 # ./man/md2man-all.sh runs outside the build container (if at all), since we don't have go-md2man here
 
 %check
