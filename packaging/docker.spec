@@ -134,6 +134,9 @@ install -p -m 644 contrib/syntax/vim/syntax/dockerfile.vim $RPM_BUILD_ROOT/usr/s
 install -d $RPM_BUILD_ROOT/usr/share/nano
 install -p -m 644 contrib/syntax/nano/Dockerfile.nanorc $RPM_BUILD_ROOT/usr/share/nano/Dockerfile.nanorc
 
+# add check config
+install -p -m 755 contrib/check-config.sh $RPM_BUILD_ROOT/usr/share/bash-completion/completions
+
 # list files owned by the package here
 %files
 /%{_bindir}/docker
@@ -143,6 +146,7 @@ install -p -m 644 contrib/syntax/nano/Dockerfile.nanorc $RPM_BUILD_ROOT/usr/shar
 /%{_unitdir}/docker.socket
 /etc/sysconfig/docker
 /%{_initddir}/docker
+/usr/share/bash-completion/completions/check-config.sh
 /usr/share/bash-completion/completions/docker
 /usr/share/zsh/vendor-completions/_docker
 /usr/share/fish/completions/docker.fish
