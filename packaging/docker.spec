@@ -28,18 +28,7 @@ BuildRequires: device-mapper-devel
 
 ## Toolchain specific >>
 BuildRequires: eglibc
-BuildRequires: eglibc-locale
-BuildRequires: eglibc-devel
 BuildRequires: eglibc-devel-static
-BuildRequires: eglibc-devel-utils
-#BuildRequires: fake_binutils
-#BuildRequires: fake_binutils-devel
-BuildRequires: stbgcc483
-#BuildRequires: stbgcc483-cross
-BuildRequires: cpp483
-BuildRequires: gcc483-locale
-#BuildRequires: gcc483-info
-BuildRequires: gcc483-c++
 BuildRequires: libstdc++-devel
 Requires: systemd-units
 # End Toolchain specific <<
@@ -48,6 +37,7 @@ Requires: systemd-units
 Requires: /bin/sh
 Requires: iptables
 Requires: libcgroup
+Requires: aufs-tools
 Requires: tar
 Requires: xz
 
